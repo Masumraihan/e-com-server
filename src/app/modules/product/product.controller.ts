@@ -21,7 +21,8 @@ const getAllProducts = catchAsync(async (req, res) => {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'All products fetched successfully',
-    data: products,
+    meta: products.meta,
+    data: products.data,
   });
 });
 

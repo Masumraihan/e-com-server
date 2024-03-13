@@ -10,8 +10,8 @@ type TSendResponse<T> = {
   statusCode: number;
   success: boolean;
   message: string;
-  data: T;
   meta?: TMeta;
+  data: T;
 };
 
 const sendResponse = <T>(res: Response, data: TSendResponse<T>) => {

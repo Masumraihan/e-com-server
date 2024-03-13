@@ -31,3 +31,24 @@ const createProductValidationSchema = z.object({
     keywords: z.array(z.string()).optional(),
   }),
 });
+
+const updateProductValidationSchema = z.object({
+  body: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    price: z.number().optional(),
+    category: z.string().optional(),
+    images: z.array(z.string()).optional(),
+    quantity: z.number().optional(),
+    discount: z.number().optional(),
+    user: z.string().optional(),
+    size: z.string().optional(),
+    color: z.string().optional(),
+    keywords: z.array(z.string()).optional(),
+  }),
+});
+
+export const productValidations = {
+  createProductValidationSchema,
+  updateProductValidationSchema,
+};

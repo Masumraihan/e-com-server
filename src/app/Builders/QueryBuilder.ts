@@ -1,5 +1,5 @@
 import { FilterQuery, Query } from 'mongoose';
-import { productSearchableFields } from '../modules/product/product.contant';
+import { productSearchableFields } from '../modules/product/product.constant';
 
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
@@ -27,7 +27,8 @@ class QueryBuilder<T> {
     return this;
   }
 
-  filter(excludeFields: string[]) {
+  filter() {
+    const excludeFields = ['searchTerm', 'page', 'limit', 'sortBy', 'fields'];
     const queryObj = { ...this.query } as FilterQuery<T>;
     excludeFields.forEach((field) => delete queryObj[field]);
     this.modelQuery = this.modelQuery.find(queryObj);

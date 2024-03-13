@@ -6,9 +6,10 @@ import { StatusCodes } from 'http-status-codes';
 import config from '../config';
 import { JwtPayload, verify } from 'jsonwebtoken';
 import { verifyToken } from '../modules/auth/auth.utils';
+import UserModel from '../modules/user/user.model';
 
 const auth = (...requiredRoles: TUserRole[]) => {
-  return catchAsync((req: Request, res: Response, next: NextFunction) => {
+  return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
 
     if (!token) {
@@ -26,8 +27,21 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'unauthorized');
     }
 
-    req.user = decoded;
+    const isUserExist = await UserModel.findOne({ email: decoded.email });
 
+    if (!isUserExist) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'unauthorized');
+    }
+
+    if (isUserExist.isDeleted) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'unauthorized');
+    }
+
+    if (isUserExist.isBlocked) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'unauthorized');
+    }
+
+    req.user = decoded;
     next();
   });
 };

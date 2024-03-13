@@ -5,7 +5,7 @@ import sendResponse from '../../utils/sendResponse';
 
 const createProduct = catchAsync(async (req, res) => {
   const data = req.body;
-  console.log(req.user);
+
   const product = await productServices.createProductIntoDb(data, req.user);
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,

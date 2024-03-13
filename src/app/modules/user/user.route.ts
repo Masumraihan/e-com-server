@@ -6,8 +6,8 @@ import { userValidations } from '../auth/auth.validation';
 
 const userRoutes = Router();
 
-userRoutes.get('/get-all-users', auth('admin', 'superAdmin'), userControllers.getAllUser);
-//userRoutes.get('/get-all-admins', auth('superAdmin'), userControllers.getAllAdmins);
+userRoutes.get('/get-all-customers', auth('admin', 'superAdmin'), userControllers.getAllCustomers);
+userRoutes.get('/get-all-users', auth('superAdmin'), userControllers.getAllUsers);
 userRoutes.get('/profile', auth('admin', 'superAdmin', 'customer'), userControllers.getUserProfile);
 userRoutes.patch(
   '/update-profile',

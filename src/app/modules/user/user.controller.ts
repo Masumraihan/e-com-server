@@ -3,24 +3,25 @@ import catchAsync from '../../utils/catchAsync';
 import { userServices } from './user.service';
 import sendResponse from '../../utils/sendResponse';
 
-const getAllUser = catchAsync(async (req, res) => {
-  const result = await userServices.getAllUserFromDb();
+const getAllCustomers = catchAsync(async (req, res) => {
+  const result = await userServices.getAllCustomerFromDb();
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'All user fetched successfully',
+    message: 'All customers fetched successfully',
     data: result,
   });
 });
-const getAllAdmins = catchAsync(async (req, res) => {
-  const result = await userServices.getAllAdmins();
+const getAllUsers = catchAsync(async (req, res) => {
+  const result = await userServices.getAllUsersFromDb(req.query);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'All admins fetched successfully',
-    data: result,
+    message: 'All users fetched successfully',
+    data: result.data,
+    meta: result.meta,
   });
 });
 
@@ -80,8 +81,8 @@ const changePassword = catchAsync(async (req, res) => {
 //});
 
 export const userControllers = {
-  getAllUser,
-  getAllAdmins,
+  getAllCustomers,
+  getAllUsers,
   getUserProfile,
   updateUserStatus,
   updateProfile,

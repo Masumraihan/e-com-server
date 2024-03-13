@@ -7,8 +7,9 @@ import AppError from '../../errors/AppError';
 import { StatusCodes } from 'http-status-codes';
 import { decrypt, encrypt } from 'secure-encrypt';
 import config from '../../config';
+import QueryBuilder from '../../Builders/QueryBuilder';
 
-const getAllUserFromDb = async () => {
+const getAllCustomerFromDb = async () => {
   const result = await UserModel.find({ isDeleted: false, role: userRole.customer });
   return result;
 };
@@ -24,9 +25,12 @@ const getUserProfileFromDb = async (user: JwtPayload) => {
   return result;
 };
 
-const getAllAdmins = async () => {
-  const result = await UserModel.find({ isDeleted: false, isBlocked: false, role: userRole.admin });
-  return result;
+const getAllUsersFromDb = async (query: Record<string, unknown>) => {
+  const userQuery = new QueryBuilder(UserModel.find({ isDeleted: false, isBlocked: false }), query).filter();
+  const data = await userQuery.modelQuery;
+  const meta = await userQuery.meta();
+
+  return { data, meta };
 };
 
 // ADMIN ONLY CAN UPDATE USER STATUS LIKE BLOCK AND UNBLOCK, AND DELETE
@@ -79,8 +83,8 @@ const changePasswordIntoDb = async (user: JwtPayload, payload: { oldPassword: st
 //};
 
 export const userServices = {
-  getAllUserFromDb,
-  getAllAdmins,
+  getAllCustomerFromDb,
+  getAllUsersFromDb,
   getUserProfileFromDb,
   updateUserStatusIntoDb,
   updateProfileIntoDb,

@@ -24,13 +24,12 @@ const getAllAdmins = catchAsync(async (req, res) => {
   });
 });
 
-const getSingleUser = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await userServices.getSingleUserFromDb(id);
+const getUserProfile = catchAsync(async (req, res) => {
+  const result = await userServices.getUserProfileFromDb(req.user);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'User fetched successfully',
+    message: 'Profile fetched successfully',
     data: result,
   });
 });
@@ -43,6 +42,28 @@ const updateUserStatus = catchAsync(async (req, res) => {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'User updated successfully',
+    data: result,
+  });
+});
+
+const updateProfile = catchAsync(async (req, res) => {
+  const data = req.body;
+  const result = await userServices.updateProfileIntoDb(req.user, data);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Profile updated successfully',
+    data: result,
+  });
+});
+
+const changePassword = catchAsync(async (req, res) => {
+  const data = req.body;
+  const result = await userServices.changePasswordIntoDb(req.user, data);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Password updated successfully',
     data: result,
   });
 });
@@ -61,6 +82,8 @@ const updateUserStatus = catchAsync(async (req, res) => {
 export const userControllers = {
   getAllUser,
   getAllAdmins,
-  getSingleUser,
+  getUserProfile,
   updateUserStatus,
+  updateProfile,
+  changePassword,
 };

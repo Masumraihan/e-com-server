@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import AppError from '../../errors/AppError';
 import UserModel from '../user/user.model';
-import { TProductCategory } from './productCategory.interface';
-import { ProductCategoryModel } from './productCategory.model';
+import { TProductCategory } from './category.interface';
+import { ProductCategoryModel } from './category.model';
 
 const createProductCategoryIntoDb = async (payload: TProductCategory) => {
   //const isUserExist = await UserModel.findById(payload.user);

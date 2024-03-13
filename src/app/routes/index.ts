@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authRoutes from '../modules/auth/auth.route';
-import categoryRoutes from '../modules/productCategory/productCategory.route';
+import categoryRoutes from '../modules/productCategory/category.route';
 import userRoutes from '../modules/user/user.route';
 import productRoutes from '../modules/product/product.route';
 import subCategoryRoutes from '../modules/subCategory/subCategory.route';

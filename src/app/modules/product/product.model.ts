@@ -1,6 +1,14 @@
 import { Schema, model } from 'mongoose';
 import { TProduct } from './product.interface';
 
+const keywordSchema = {
+  value: { type: String, required: [true, 'Keyword value is required'] },
+  isDelete: {
+    type: Boolean,
+    default: false,
+  },
+};
+
 const productSchema = new Schema<TProduct>(
   {
     title: {
@@ -16,9 +24,9 @@ const productSchema = new Schema<TProduct>(
       type: Number,
       required: [true, 'Price is required'],
     },
-    category: {
+    subCategory: {
       type: Schema.Types.ObjectId,
-      ref: 'ProductCategory',
+      ref: 'SubCategory',
       required: [true, 'Category is required'],
     },
     images: {
@@ -50,11 +58,7 @@ const productSchema = new Schema<TProduct>(
       type: String,
     },
     keywords: {
-      type: [
-        {
-          value: String,
-        },
-      ],
+      type: [keywordSchema],
     },
     isDeleted: {
       type: Boolean,

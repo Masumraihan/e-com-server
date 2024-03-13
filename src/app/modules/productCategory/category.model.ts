@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TProductCategory } from './productCategory.interface';
+import { TProductCategory } from './category.interface';
 
 const productCategorySchema = new Schema<TProductCategory>(
   {
@@ -23,4 +23,4 @@ const productCategorySchema = new Schema<TProductCategory>(
   },
 );
 
-export const ProductCategoryModel = model<TProductCategory>('ProductCategory', productCategorySchema);
+export const ProductCategoryModel = model<TProductCategory>('Category', productCategorySchema);

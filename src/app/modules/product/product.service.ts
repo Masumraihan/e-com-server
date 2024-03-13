@@ -32,6 +32,7 @@ const getSingleProductFromDb = async (id: string) => {
 };
 
 const updateProductIntoDb = async (id: string, payload: Partial<TProduct>) => {
+  // TODO NEED TO HANDLE PRODUCT KEYWORDS DELETE AND UPDATE, LIKE 
   const result = await ProductModel.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,

@@ -6,6 +6,7 @@ const productSchema = new Schema<TProduct>(
     title: {
       type: String,
       required: [true, 'Title is required'],
+      unique: true,
     },
     description: {
       type: String,
@@ -16,7 +17,8 @@ const productSchema = new Schema<TProduct>(
       required: [true, 'Price is required'],
     },
     category: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'ProductCategory',
       required: [true, 'Category is required'],
     },
     images: {

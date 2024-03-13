@@ -12,11 +12,11 @@ const productCategorySchema = new Schema<TProductCategory>(
       type: Boolean,
       default: false,
     },
-    //user: {
-    //  type: Schema.Types.ObjectId,
-    //  ref: 'User',
-    //  required: [true, 'User is required'],
-    //},
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'User is required'],
+    },
   },
   {
     timestamps: true,

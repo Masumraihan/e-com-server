@@ -5,7 +5,7 @@ export type TProduct = {
   title: string;
   description: string;
   price: number;
-  category: string;
+  category: Types.ObjectId;
   images: string[];
   quantity: number;
   discount: number;

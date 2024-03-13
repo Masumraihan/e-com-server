@@ -1,7 +1,7 @@
 import { JwtPayload } from 'jsonwebtoken';
 import { TSubCategory } from './subCategory.interface';
 import { SubCategoryModel } from './subCategory.model';
-import getUserWithEmail from '../../utils/getUserWIthEmail';
+import getUserWithEmail from '../../utils/getUserWithEmail';
 import QueryBuilder from '../../Builders/QueryBuilder';
 
 const createSubCategoryIntoDb = async (payload: TSubCategory, user: JwtPayload) => {

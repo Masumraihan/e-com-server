@@ -1,6 +1,6 @@
 import { JwtPayload } from 'jsonwebtoken';
 import QueryBuilder from '../../Builders/QueryBuilder';
-import getUserWithEmail from '../../utils/getUserWIthEmail';
+import getUserWithEmail from '../../utils/getUserWithEmail';
 import { productSearchableFields } from './product.constant';
 import { TProduct } from './product.interface';
 import { ProductModel } from './product.model';
@@ -32,7 +32,7 @@ const getSingleProductFromDb = async (id: string) => {
 };
 
 const updateProductIntoDb = async (id: string, payload: Partial<TProduct>) => {
-  // TODO NEED TO HANDLE PRODUCT KEYWORDS DELETE AND UPDATE, LIKE 
+  // TODO NEED TO HANDLE PRODUCT KEYWORDS DELETE AND UPDATE, LIKE
   const result = await ProductModel.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,

@@ -9,7 +9,7 @@ const subCategorySchema = new Schema<TSubCategory>({
   },
   category: {
     type: Schema.Types.ObjectId,
-    ref: 'ProductCategory',
+    ref: 'Category',
     required: [true, 'Category is required'],
   },
   user: {

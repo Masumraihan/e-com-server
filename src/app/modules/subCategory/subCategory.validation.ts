@@ -4,7 +4,6 @@ const createSubCategoryValidationSchema = z.object({
   body: z.object({
     subCategory: z.string({ required_error: 'SubCategory is required' }),
     category: z.string({ required_error: 'Category is required' }),
-    user: z.string({ required_error: 'User is required' }),
   }),
 });
 

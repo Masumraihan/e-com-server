@@ -5,32 +5,32 @@ import catchAsync from '../../utils/catchAsync';
 
 const createCategory = catchAsync(async (req, res) => {
   const data = req.body;
-  const productCategory = await productCategoryServices.createProductCategoryIntoDb(data);
+  const productCategory = await productCategoryServices.createCategoryIntoDb(data, req.user);
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
     success: true,
-    message: 'Product Category created successfully',
+    message: 'Category created successfully',
     data: productCategory,
   });
 });
 
 const getAllCategories = catchAsync(async (req, res) => {
-  const result = await productCategoryServices.getAllProductCategoriesFromDb();
+  const result = await productCategoryServices.getAllCategoriesFromDb();
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'All Product Categories fetched successfully',
+    message: 'All Categories fetched successfully',
     data: result,
   });
 });
 
 const getSingleCategory = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await productCategoryServices.getSingleProductCategoryFromDb(id);
+  const result = await productCategoryServices.getSingleCategoryFromDb(id);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'Single Product Category fetched successfully',
+    message: 'Single Category fetched successfully',
     data: result,
   });
 });
@@ -38,22 +38,22 @@ const getSingleCategory = catchAsync(async (req, res) => {
 const updateCategory = catchAsync(async (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  const result = await productCategoryServices.updateProductCategoryFromDb(id, data);
+  const result = await productCategoryServices.updateCategoryFromDb(id, data);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'Product Category updated successfully',
+    message: 'Category updated successfully',
     data: result,
   });
 });
 
 const deleteCategory = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await productCategoryServices.deleteProductCategoryFromDb(id);
+  const result = await productCategoryServices.deleteCategoryFromDb(id);
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'Product Category deleted successfully',
+    message: 'Category deleted successfully',
     data: result,
   });
 });

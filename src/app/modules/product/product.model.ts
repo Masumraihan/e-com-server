@@ -50,7 +50,11 @@ const productSchema = new Schema<TProduct>(
       type: String,
     },
     keywords: {
-      type: [String],
+      type: [
+        {
+          value: String,
+        },
+      ],
     },
     isDeleted: {
       type: Boolean,

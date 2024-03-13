@@ -1,5 +1,8 @@
 import { Types } from 'mongoose';
-import productStatus from './product.contant';
+
+export type TKeyword = {
+  value: string;
+};
 
 export type TProduct = {
   title: string;
@@ -13,6 +16,6 @@ export type TProduct = {
   user: Types.ObjectId;
   size?: string;
   color?: string;
-  keywords?: string[];
+  keywords?: TKeyword[];
   isDeleted: boolean;
 };

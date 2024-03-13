@@ -1,5 +1,4 @@
 import { FilterQuery, Query } from 'mongoose';
-import { productSearchableFields } from '../modules/product/product.constant';
 
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
@@ -8,13 +7,13 @@ class QueryBuilder<T> {
     this.modelQuery = modelQuery;
     this.query = query;
   }
-  search() {
+  search(searchableFields: string[]) {
     let searchTerm = '';
     if (this.query?.searchTerm) {
       searchTerm = this.query.searchTerm as string;
     }
     this.modelQuery = this.modelQuery.find({
-      $or: productSearchableFields.map(
+      $or: searchableFields.map(
         (field) =>
           ({
             [field]: {

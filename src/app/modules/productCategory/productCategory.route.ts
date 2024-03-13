@@ -4,27 +4,27 @@ import { productCategoryValidation } from './productCategory.validation';
 import validateRequest from '../../middlewares/validateRequest';
 import auth from '../../middlewares/auth';
 
-const productCategoryRoutes = Router();
+const categoryRoutes = Router();
 
-productCategoryRoutes.post(
+categoryRoutes.post(
   '/create-category',
   auth('admin', 'superAdmin'),
   validateRequest(productCategoryValidation.createProductCategoryValidationSchema),
   productCategoryControllers.createProductCategory,
 );
 
-productCategoryRoutes.get('/get-all-categories', productCategoryControllers.getAllProductCategories);
-productCategoryRoutes.get('/get-single-category/:id', productCategoryControllers.getSingleProductCategory);
-productCategoryRoutes.patch(
+categoryRoutes.get('/get-all-categories', productCategoryControllers.getAllProductCategories);
+categoryRoutes.get('/get-single-category/:id', productCategoryControllers.getSingleProductCategory);
+categoryRoutes.patch(
   '/update-category/:id',
   auth('admin', 'superAdmin'),
   validateRequest(productCategoryValidation.updateProductCategoryValidationSchema),
   productCategoryControllers.updateProductCategory,
 );
-productCategoryRoutes.delete(
+categoryRoutes.delete(
   '/delete-category/:id',
   auth('admin', 'superAdmin'),
   productCategoryControllers.deleteProductCategory,
 );
 
-export default productCategoryRoutes;
+export default categoryRoutes;

@@ -1,13 +1,9 @@
 import { JwtPayload } from 'jsonwebtoken';
-import { TProduct } from './product.interface';
-import { ProductModel } from './product.model';
-import UserModel from '../user/user.model';
-import AppError from '../../errors/AppError';
-import { StatusCodes } from 'http-status-codes';
-import { productSearchableFields } from './product.constant';
 import QueryBuilder from '../../Builders/QueryBuilder';
 import getUserWithEmail from '../../utils/getUserWIthEmail';
-import { TUser } from '../user/user.interface';
+import { productSearchableFields } from './product.constant';
+import { TProduct } from './product.interface';
+import { ProductModel } from './product.model';
 
 const createProductIntoDb = async (payload: TProduct, user: JwtPayload) => {
   const isUserExist = await getUserWithEmail(user.email);
@@ -17,7 +13,12 @@ const createProductIntoDb = async (payload: TProduct, user: JwtPayload) => {
 };
 
 const getAllProductsFromDb = async (query: Record<string, unknown>) => {
-  const productQuery = new QueryBuilder(ProductModel.find(), query).search().filter().sort().paginate().fields();
+  const productQuery = new QueryBuilder(ProductModel.find(), query)
+    .search(productSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
   const data = await productQuery.modelQuery;
 
   const meta = await productQuery.meta();

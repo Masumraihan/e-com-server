@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
+import { TSubCategory } from './subCategory.interface';
 
-const subCategorySchema = new Schema({
+const subCategorySchema = new Schema<TSubCategory>({
   subCategory: {
     type: String,
     unique: true,
@@ -16,10 +17,6 @@ const subCategorySchema = new Schema({
     ref: 'User',
     required: [true, 'User is required'],
   },
-  isDeleted: {
-    type: Boolean,
-    default: false,
-  },
 });
 
-export const SubCategoryModel = model('SubCategory', subCategorySchema);
+export const SubCategoryModel = model<TSubCategory>('SubCategory', subCategorySchema);

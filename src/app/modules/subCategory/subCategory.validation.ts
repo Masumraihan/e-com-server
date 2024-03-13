@@ -11,12 +11,10 @@ const createSubCategoryValidationSchema = z.object({
 const updateSubCategoryValidationSchema = z.object({
   body: z.object({
     subCategory: z.string().optional(),
-    category: z.string().optional(),
-    user: z.string().optional(),
   }),
 });
 
 export const subCategoryValidations = {
   createSubCategoryValidationSchema,
   updateSubCategoryValidationSchema,
-}
+};

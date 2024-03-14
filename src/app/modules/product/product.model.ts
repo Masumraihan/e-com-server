@@ -1,13 +1,18 @@
 import { Schema, model } from 'mongoose';
-import { TProduct } from './product.interface';
+import { TKeyword, TProduct } from './product.interface';
 
-const keywordSchema = {
-  value: { type: String, required: [true, 'Keyword value is required'] },
-  isDelete: {
-    type: Boolean,
-    default: false,
+const keywordSchema = new Schema<TKeyword>(
+  {
+    value: { type: String, unique: true, required: [true, 'Keyword value is required'] },
+    isDelete: {
+      type: Boolean,
+      default: false,
+    },
   },
-};
+  {
+    _id: false,
+  },
+);
 
 const productSchema = new Schema<TProduct>(
   {

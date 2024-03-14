@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 
 export type TKeyword = {
   value: string;
+  isDelete: boolean;
 };
 
 export type TProduct = {

@@ -8,10 +8,6 @@ const productCategorySchema = new Schema<TProductCategory>(
       unique: true,
       required: [true, 'Category is required'],
     },
-    isDeleted: {
-      type: Boolean,
-      default: false,
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

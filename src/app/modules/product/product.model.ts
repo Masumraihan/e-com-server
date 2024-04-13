@@ -3,7 +3,7 @@ import { TKeyword, TProduct } from './product.interface';
 
 const keywordSchema = new Schema<TKeyword>(
   {
-    value: { type: String, unique: true, required: [true, 'Keyword value is required'] },
+    value: { type: String, required: [true, 'Value is required'] },
     isDelete: {
       type: Boolean,
       default: false,

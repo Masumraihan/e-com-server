@@ -8,6 +8,7 @@ import { StatusCodes } from 'http-status-codes';
 import { decrypt, encrypt } from 'secure-encrypt';
 import config from '../../config';
 import QueryBuilder from '../../Builders/QueryBuilder';
+import { userSearchableFields } from './user.constant';
 
 const getAllCustomerFromDb = async () => {
   const result = await UserModel.find({ isDeleted: false, role: userRole.customer });
@@ -26,7 +27,7 @@ const getUserProfileFromDb = async (user: JwtPayload) => {
 };
 
 const getAllUsersFromDb = async (query: Record<string, unknown>) => {
-  const userQuery = new QueryBuilder(UserModel.find({ isDeleted: false, isBlocked: false }), query).filter();
+  const userQuery = new QueryBuilder(UserModel.find({ isDeleted: false }), query).search(userSearchableFields).filter();
   const data = await userQuery.modelQuery;
   const meta = await userQuery.meta();
 
@@ -35,7 +36,7 @@ const getAllUsersFromDb = async (query: Record<string, unknown>) => {
 
 // ADMIN ONLY CAN UPDATE USER STATUS LIKE BLOCK AND UNBLOCK, AND DELETE
 const updateUserStatusIntoDb = async (id: string, payload: Partial<TUser>) => {
-  const result = await UserModel.findOneAndUpdate({ _id: id, role: userRole.customer }, payload, {
+  const result = await UserModel.findOneAndUpdate({ _id: id }, payload, {
     new: true,
     runValidators: true,
   });
@@ -77,10 +78,18 @@ const changePasswordIntoDb = async (user: JwtPayload, payload: { oldPassword: st
   return result;
 };
 
-//const deleteUserFromDb = async (id: string) => {
-//  const result = await UserModel.findOneAndUpdate({ _id: id, role: userRole.customer }, { isDeleted: true });
-//  return result;
-//};
+const deleteUserFromDb = async (id: string) => {
+  const result = await UserModel.findOneAndUpdate(
+    { _id: id, role: { $ne: userRole.superAdmin } },
+    { isDeleted: true },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+
+  return result;
+};
 
 export const userServices = {
   getAllCustomerFromDb,
@@ -89,4 +98,5 @@ export const userServices = {
   updateUserStatusIntoDb,
   updateProfileIntoDb,
   changePasswordIntoDb,
+  deleteUserFromDb,
 };

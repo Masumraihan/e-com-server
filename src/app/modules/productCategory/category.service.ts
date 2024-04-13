@@ -17,12 +17,12 @@ const createCategoryIntoDb = async (payload: TProductCategory, user: JwtPayload)
 };
 
 const getAllCategoriesFromDb = async () => {
-  const result = await ProductCategoryModel.find({ isDeleted: false });
+  const result = await ProductCategoryModel.find();
   return result;
 };
 
 const getSingleCategoryFromDb = async (id: string) => {
-  const result = await ProductCategoryModel.findOne({ _id: id, isDeleted: false });
+  const result = await ProductCategoryModel.findById(id);
   return result;
 };
 
@@ -35,7 +35,7 @@ const updateCategoryFromDb = async (id: string, payload: Partial<TProductCategor
 };
 
 const deleteCategoryFromDb = async (id: string) => {
-  const result = await ProductCategoryModel.findByIdAndUpdate(id, { isDeleted: true });
+  const result = await ProductCategoryModel.findByIdAndDelete(id);
   return result;
 };
 

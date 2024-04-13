@@ -69,16 +69,16 @@ const changePassword = catchAsync(async (req, res) => {
   });
 });
 
-//const deleteUser = catchAsync(async (req, res) => {
-//  const { id } = req.params;
-//  const result = await userServices.deleteUserFromDb(id);
-//  sendResponse(res, {
-//    statusCode: StatusCodes.OK,
-//    success: true,
-//    message: 'User deleted successfully',
-//    data: result,
-//  });
-//});
+const deleteUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await userServices.deleteUserFromDb(id);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User deleted successfully',
+    data: result,
+  });
+});
 
 export const userControllers = {
   getAllCustomers,
@@ -87,4 +87,5 @@ export const userControllers = {
   updateUserStatus,
   updateProfile,
   changePassword,
+  deleteUser,
 };

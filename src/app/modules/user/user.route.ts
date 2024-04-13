@@ -22,6 +22,6 @@ userRoutes.put(
   userControllers.changePassword,
 );
 userRoutes.patch('/update-user/:id', auth('admin', 'superAdmin'), userControllers.updateUserStatus);
-//userRoutes.delete('/delete-user/:id', auth('admin', 'superAdmin'), userControllers.deleteUser);
+userRoutes.delete('/delete-user/:id', auth('admin', 'superAdmin'), userControllers.deleteUser);
 
 export default userRoutes;

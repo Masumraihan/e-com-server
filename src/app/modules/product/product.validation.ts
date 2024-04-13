@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const keywordsValidationSchema = z.object({
   value: z.string(),
-  isDelete: z.boolean(),
+  isDelete: z.boolean().optional(),
 });
 
 const createProductValidationSchema = z.object({

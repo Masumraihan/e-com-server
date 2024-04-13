@@ -7,10 +7,18 @@ const subCategorySchema = new Schema<TSubCategory>({
     unique: true,
     required: [true, 'SubCategory is required'],
   },
+  isFeatured: {
+    type: Boolean,
+    default: false,
+  },
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
     required: [true, 'Category is required'],
+  },
+  icon: {
+    type: String,
+    required: [true, 'Icon is required'],
   },
   user: {
     type: Schema.Types.ObjectId,

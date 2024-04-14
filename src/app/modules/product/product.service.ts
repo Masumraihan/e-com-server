@@ -74,12 +74,12 @@ const updateProductIntoDb = async (id: string, payload: Partial<TProduct>) => {
         },
         { session },
       );
-
-      await session.commitTransaction();
-      await session.endSession();
-      const product = await ProductModel.findOne({ _id: id });
-      return product;
     }
+    await session.commitTransaction();
+    await session.endSession();
+    const product = await ProductModel.findOne({ _id: id });
+
+    return product;
   } catch (error: any) {
     await session.abortTransaction();
     await session.endSession();

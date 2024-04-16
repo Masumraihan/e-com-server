@@ -13,9 +13,9 @@ const createSubCategoryIntoDb = async (payload: TSubCategory, user: JwtPayload) 
 
 const getAllSubCategoriesFromDb = async (query: Record<string, unknown>) => {
   const subCategorySearchableFields = ['subCategory'];
-  const result = new QueryBuilder(SubCategoryModel.find().populate('category'), query).search(
-    subCategorySearchableFields,
-  );
+  const result = new QueryBuilder(SubCategoryModel.find().populate('category'), query)
+    .search(subCategorySearchableFields)
+    .filter();
   const data = await result.modelQuery;
   return data;
 };

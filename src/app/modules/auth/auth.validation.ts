@@ -34,7 +34,30 @@ const loginUserValidationSchema = z.object({
   }),
 });
 
+const updateUserValidationSchema = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    email: z.string().email('Not a valid email').optional(),
+    address: z.string().optional(),
+  }),
+});
+
+const changePasswordValidationSchema = z.object({
+  body: z.object({
+    oldPassword: z.string({
+      required_error: 'Old password is required',
+    }),
+    newPassword: z
+      .string({
+        required_error: 'New password is required',
+      })
+      .min(6, 'Password too short'),
+  }),
+});
+
 export const userValidations = {
   registerUserValidationSchema,
   loginUserValidationSchema,
+  updateUserValidationSchema,
+  changePasswordValidationSchema,
 };

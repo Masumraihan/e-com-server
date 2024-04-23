@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+const keywordsValidationSchema = z.object({
+  value: z.string(),
+  isDelete: z.boolean().optional(),
+});
+
 const createProductValidationSchema = z.object({
   body: z.object({
     title: z.string({
@@ -11,7 +16,7 @@ const createProductValidationSchema = z.object({
     price: z.number({
       required_error: 'Price is required',
     }),
-    category: z.string({
+    subCategory: z.string({
       required_error: 'Category is required',
     }),
     images: z.array(
@@ -23,11 +28,27 @@ const createProductValidationSchema = z.object({
       required_error: 'Quantity is required',
     }),
     discount: z.number().optional(),
-    user: z.string({
-      required_error: 'User is required',
-    }),
     size: z.string().optional(),
     color: z.string().optional(),
-    keywords: z.array(z.string()).optional(),
+    keywords: z.array(keywordsValidationSchema).optional(),
   }),
 });
+
+const updateProductValidationSchema = z.object({
+  body: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    price: z.number().optional(),
+    images: z.array(z.string()).optional(),
+    quantity: z.number().optional(),
+    discount: z.number().optional(),
+    size: z.string().optional(),
+    color: z.string().optional(),
+    keywords: z.array(keywordsValidationSchema).optional(),
+  }),
+});
+
+export const productValidations = {
+  createProductValidationSchema,
+  updateProductValidationSchema,
+};

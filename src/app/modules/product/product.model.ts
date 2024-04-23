@@ -1,5 +1,18 @@
 import { Schema, model } from 'mongoose';
-import { TProduct } from './product.interface';
+import { TKeyword, TProduct } from './product.interface';
+
+const keywordSchema = new Schema<TKeyword>(
+  {
+    value: { type: String, required: [true, 'Value is required'] },
+    isDelete: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    _id: false,
+  },
+);
 
 const productSchema = new Schema<TProduct>(
   {
@@ -16,9 +29,9 @@ const productSchema = new Schema<TProduct>(
       type: Number,
       required: [true, 'Price is required'],
     },
-    category: {
+    subCategory: {
       type: Schema.Types.ObjectId,
-      ref: 'ProductCategory',
+      ref: 'SubCategory',
       required: [true, 'Category is required'],
     },
     images: {
@@ -50,7 +63,7 @@ const productSchema = new Schema<TProduct>(
       type: String,
     },
     keywords: {
-      type: [String],
+      type: [keywordSchema],
     },
     isDeleted: {
       type: Boolean,

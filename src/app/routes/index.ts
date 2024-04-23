@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import authRoutes from '../modules/auth/auth.route';
-import productCategoryRoutes from '../modules/productCategory/productCategory.route';
+import categoryRoutes from '../modules/productCategory/category.route';
 import userRoutes from '../modules/user/user.route';
 import productRoutes from '../modules/product/product.route';
+import subCategoryRoutes from '../modules/subCategory/subCategory.route';
+import reviewRoutes from '../modules/review/reivew.route';
 
 const router = Router();
 
@@ -17,11 +19,19 @@ const moduleRoutes = [
   },
   {
     path: '/category',
-    route: productCategoryRoutes,
+    route: categoryRoutes,
+  },
+  {
+    path: '/sub-category',
+    route: subCategoryRoutes,
   },
   {
     path: '/product',
     route: productRoutes,
+  },
+  {
+    path: '/review',
+    route: reviewRoutes,
   },
 ];
 

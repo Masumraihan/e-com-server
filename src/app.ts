@@ -8,7 +8,13 @@ import router from './app/routes';
 const app: Application = express();
 
 // PARSERS
-app.use(cors());
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'https://e-commerse-flax.vercel.app'],
+    credentials: true,
+    
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 

@@ -12,6 +12,7 @@ app.use(
   cors({
     origin: ['http://localhost:3000', 'https://e-commerse-flax.vercel.app'],
     credentials: true,
+    
   }),
 );
 app.use(express.json());

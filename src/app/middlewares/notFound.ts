@@ -6,6 +6,7 @@ const notFound = (req: Request, res: Response) => {
     status: StatusCodes.NOT_FOUND,
     message: ' API Not Found',
     error: 'Not Found',
+    path: req.originalUrl,
   });
 };
 export default notFound;

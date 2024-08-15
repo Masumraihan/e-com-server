@@ -12,11 +12,7 @@ reviewRoutes.post(
   validateRequest(reviewValidations.reviewValidationSchema),
   reviewControllers.createView,
 );
-reviewRoutes.get(
-  '/get-product-reviews/:id',
-  auth('customer', 'admin', 'superAdmin'),
-  reviewControllers.getProductReview,
-);
-reviewRoutes.get('/get-all-product-reviews', auth('customer', 'admin', 'superAdmin'), reviewControllers.getAllReviews);
+reviewRoutes.get('/get-product-reviews/:id', reviewControllers.getProductReview);
+reviewRoutes.get('/get-all-product-reviews', reviewControllers.getAllReviews);
 
 export default reviewRoutes;

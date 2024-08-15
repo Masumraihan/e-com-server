@@ -23,9 +23,7 @@ const getAllProductsFromDb = async (query: Record<string, unknown>) => {
     .paginate()
     .fields();
   const data = await productQuery.modelQuery;
-
   const meta = await productQuery.meta();
-
   return { data, meta };
 };
 

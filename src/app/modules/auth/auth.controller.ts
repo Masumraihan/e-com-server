@@ -11,17 +11,19 @@ const register = catchAsync(async (req, res) => {
   // SET REFRESH TOKEN IN COOKIE
   res.cookie('refreshToken', refreshToken, {
     httpOnly: config.node_env === 'production',
-    secure: true,
+    secure: config.node_env === 'production',
     sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24 * 365,
+    //domain: 'e-commerse-flax.vercel.app',
+    //domain: 'http://localhost:3000',
   });
-  res.cookie('accessToken', accessToken, {
-    httpOnly: config.node_env === 'production',
-    secure: true,
-    sameSite: 'none',
-    // cookie access token expires in 1 day
-    maxAge: 1000 * 60 * 60 * 24,
-  });
+  //res.cookie('accessToken', accessToken, {
+  //  httpOnly: config.node_env === 'production',
+  //  secure: config.node_env === 'production',
+  //  sameSite: 'none',
+  //  domain: 'e-commerse-flax.vercel.app',
+  //  maxAge: 1000 * 60 * 60 * 24,
+  //});
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
     success: true,
@@ -37,17 +39,10 @@ const login = catchAsync(async (req, res) => {
   // SET REFRESH TOKEN IN COOKIE
   res.cookie('refreshToken', refreshToken, {
     httpOnly: config.node_env === 'production',
-    secure: true,
-    sameSite: 'none',
+    secure: config.node_env === 'production',
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
-  res.cookie('accessToken', accessToken, {
-    httpOnly: config.node_env === 'production',
-    secure: true,
-    sameSite: 'none',
-    // cookie access token expires in 1 day
-    maxAge: 1000 * 60 * 60 * 24,
-  });
+
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,

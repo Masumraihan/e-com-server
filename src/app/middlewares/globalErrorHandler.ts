@@ -17,7 +17,7 @@ const handleGlobalError: ErrorRequestHandler = (error, req, res, next) => {
       },
     ],
     message: error?.message || 'Something went wrong!',
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+    statusCode: error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
   };
 
   if (error instanceof ZodError) {
@@ -31,7 +31,7 @@ const handleGlobalError: ErrorRequestHandler = (error, req, res, next) => {
   }
 
   formattedError.message = formattedError.errorSources[0]?.message;
-  formattedError.statusCode = StatusCodes.BAD_REQUEST;
+  //formattedError.statusCode = StatusCodes.BAD_REQUEST;
 
   res.status(formattedError.statusCode).json({
     success: false,

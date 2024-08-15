@@ -35,6 +35,7 @@ const updateCategoryFromDb = async (id: string, payload: Partial<TProductCategor
 };
 
 const deleteCategoryFromDb = async (id: string) => {
+  console.log({ id });
   const result = await ProductCategoryModel.findByIdAndDelete(id);
   return result;
 };

@@ -14,7 +14,7 @@ const keywordSchema = new Schema<TKeyword>(
   },
 );
 
-const productSchema = new Schema<TProduct>(
+export const productSchema = new Schema<TProduct>(
   {
     title: {
       type: String,
